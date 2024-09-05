@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Produs</title>
+    <link rel="stylesheet" href="products.css">
+    <script>
+        function changeLanguage(lang) {
+            // Simplu exemplu de schimbare a limbii
+            const descriptions = {
+                ro: "Decoratie Lingura de Ceramica: decorațiune din ceramică în formă de lingură, perfectă pentru a adăuga un accent de originalitate și eleganță în orice spațiu.",
+                eng: "Ceramic Spoon Decoration: ceramic spoon decoration, perfect for adding a touch of originality and elegance to any space.",
+                hun: "Kerámia kanál dekoráció: kerámia kanál dekoráció, ideális választás, hogy egy kis eredetiséget és eleganciát adjon bármilyen térhez."
+            };
+            document.querySelector('.product-description').innerText = descriptions[lang];
+            const button = {
+                ro: "Inapoi",
+                eng: "Back",
+                hun: "Vissza"
+            };
+            document.querySelector('.back-button').innerText = button[lang];
+            const name = {
+                ro: "Decoratie Lingura de Ceramica",
+                eng: "Ceramic Spoon Decoration",
+                hun: "Kerámia kanál dekoráció"
+            };
+            document.querySelector('.product-name').innerText = name[lang];
+            const wishbut = {
+                ro: "Adauga in Wishlist",
+                eng: "Add to Wishlist",
+                hun: "Hozzáadás a kívánságlistához"
+            };
+            document.querySelector('.wishlist-button').innerText = wishbut[lang];
+        }
+
+        function addToWishlist() {
+            const product = {
+                name: document.querySelector('.product-name').innerText,
+                price: document.querySelector('.product-price').innerText,
+                image: document.querySelector('.product-image').src,
+                description: document.querySelector('.product-description').innerText
+            };
+
+            let wishlist = localStorage.getItem('wishlist');
+            if (!wishlist) {
+                wishlist = [];
+            } else {
+                wishlist = JSON.parse(wishlist);
+            }
+
+            wishlist.push(product);
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            alert('Produsul a fost adăugat în wishlist!');
+        }
+    </script>
+</head>
+<body>
+
+<div class="header">
+    <button class="back-button" onclick="window.location.href='index.html'">Inapoi</button>
+    <div class="language-buttons">
+        <button class="language-button" onclick="changeLanguage('ro')">RO</button>
+        <button class="language-button" onclick="changeLanguage('eng')">ENG</button>
+        <button class="language-button" onclick="changeLanguage('hun')">HUN</button>
+    </div>
+</div>
+
+<div class="product-content">
+    <img src="Sourvenirs\Breloc\3.jpg" alt="Produs" class="product-image">
+    <div class="product-details">
+        <h1 class="product-name">Decoratie Lingura de Ceramica</h1>
+        <h2 class="product-price">100 RON</h2>
+        <p class="product-description">Decoratie Lingura de Ceramica:  decorațiune din ceramică în formă de lingură, perfectă pentru a adăuga un accent de originalitate și eleganță în orice spațiu.</p>
+        <button class="wishlist-button" onclick="addToWishlist()">Add to Wishlist</button>
+    </div>
+</div>
+
+</body>
+</html>

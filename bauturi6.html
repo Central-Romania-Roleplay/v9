@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Produs</title>
+    <link rel="stylesheet" href="products.css">
+    <script>
+        function changeLanguage(lang) {
+            // Simplu exemplu de schimbare a limbii
+            const descriptions = {
+                ro: "Decoratiune Moara cu 4 Pahare: o decorațiune elegantă în formă de moară, însoțită de 4 pahare, ideală pentru a adăuga un aer sofisticat și rafinat în orice spațiu.",
+                eng: "4 Glasses Mill Decoration: an elegant mill decoration in the shape of a mill, accompanied by 4 glasses, ideal for adding a sophisticated and refined air to any space.",
+                hun: "4 pohár malom dekoráció: elegáns malom alakú malomdísz, 4 pohárral együtt, amely ideális arra, hogy kifinomult és kifinomult hangulatot kölcsönözzön bármely helyiségnek."
+            };
+            document.querySelector('.product-description').innerText = descriptions[lang];
+            const button = {
+                ro: "Inapoi",
+                eng: "Back",
+                hun: "Vissza"
+            };
+            document.querySelector('.back-button').innerText = button[lang];
+            const name = {
+                ro: "Decoratiune Moara cu 4 Pahare",
+                eng: "4 Glasses Mill Decoration",
+                hun: "4 pohár malom dekoráció"
+            };
+            document.querySelector('.product-name').innerText = name[lang];
+            const wishbut = {
+                ro: "Adauga in Wishlist",
+                eng: "Add to Wishlist",
+                hun: "Hozzáadás a kívánságlistához"
+            };
+            document.querySelector('.wishlist-button').innerText = wishbut[lang];
+        }
+
+        function addToWishlist() {
+            const product = {
+                name: document.querySelector('.product-name').innerText,
+                price: document.querySelector('.product-price').innerText,
+                image: document.querySelector('.product-image').src,
+                description: document.querySelector('.product-description').innerText
+            };
+
+            let wishlist = localStorage.getItem('wishlist');
+            if (!wishlist) {
+                wishlist = [];
+            } else {
+                wishlist = JSON.parse(wishlist);
+            }
+
+            wishlist.push(product);
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            alert('Produsul a fost adăugat în wishlist!');
+        }
+    </script>
+</head>
+<body>
+
+<div class="header">
+    <button class="back-button" onclick="window.location.href='index.html'">Inapoi</button>
+    <div class="language-buttons">
+        <button class="language-button" onclick="changeLanguage('ro')">RO</button>
+        <button class="language-button" onclick="changeLanguage('eng')">ENG</button>
+        <button class="language-button" onclick="changeLanguage('hun')">HUN</button>
+    </div>
+</div>
+
+<div class="product-content">
+    <img src="Sourvenirs\Bauturi\6.jpeg" alt="Produs" class="product-image">
+    <div class="product-details">
+        <h1 class="product-name">Decoratiune Moara cu 4 Pahare</h1>
+        <h2 class="product-price">100 RON</h2>
+        <p class="product-description">Decoratiune Moara cu 4 Pahare: o decorațiune elegantă în formă de moară, însoțită de 4 pahare, ideală pentru a adăuga un aer sofisticat și rafinat în orice spațiu.</p>
+        <button class="wishlist-button" onclick="addToWishlist()">Add to Wishlist</button>
+    </div>
+</div>
+
+</body>
+</html>
